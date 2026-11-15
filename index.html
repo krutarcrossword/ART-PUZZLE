@@ -24,7 +24,10 @@ header .brand{position:absolute;right:7px;top:5px;font-size:9px;padding:2px 4px;
 /* v1.3.1: opt-in, tile-attached number labels */
 .tile{position:relative;overflow:hidden}.tile-number{position:absolute;right:4px;bottom:4px;display:grid;place-items:center;min-width:23px;height:23px;padding:0 4px;border-radius:5px;background:#f4d48f;color:#2d1d10;font-size:13px;font-weight:900;line-height:1;box-shadow:0 1px 4px #000a;pointer-events:none}
 #numberToggle[aria-pressed="true"]{background:linear-gradient(#f6d88e,#c58a2f);color:#352315;font-weight:800}
-</style></head><body><header><h1>🎨 ART PUZZLE</h1><small>The Masterpiece Gallery</small><span class="brand">KRUTAR GAME</span></header><main class="app"><section id="home" class="view active"><div class="homebox"><h2>🏛️ Welcome to Your Gallery</h2><p class="homemeta">Solve Art Puzzles · Collect Masterpieces</p><label for="homeName">👤 Player Name</label><input id="homeName" maxlength="24" placeholder="Enter your name"><label>🏆 Gallery Collection <strong id="homeProgress" style="float:right">0 / 10</strong></label><div class="meter"><span id="homeMeter" style="width:0%"></span></div><label for="homeChoose">🎨 Select Masterpiece</label><div class="artpick"><span id="homePreviewWrap" class="preview-grid-wrap"><img id="homePreview" class="homepreview" alt="ภาพตัวอย่างผลงาน"></span><select id="homeChoose" aria-label="เลือกผลงานศิลปะ"></select></div><p class="homemeta" id="homeArtTitle"></p><button class="primary" id="homePlay">▶ PLAY PUZZLE</button><p class="homemeta">START · 3 · 2 · 1 · GO!</p><div class="homeactions"><button id="homeGallery">🏛️ Gallery</button><button id="homeRecords">🏆 Records</button></div></div><div class="footer">Version v1.3.1<br>KRUTAR GAME by KRUTAR CROSSWORD</div></section><section id="puzzle" class="view"><div class="play"><div><div class="frame"><div id="board" class="board" aria-label="กระดานสไลด์ภาพ 4 คูณ 4"></div><div id="countdown" aria-live="assertive"></div></div><div class="toolbar"><button id="start">▶ START</button><button id="shuffle" class="primary">🔀 สุ่มใหม่</button><button id="preview">👁 ดูภาพต้นฉบับ</button><button id="numberToggle" type="button" aria-pressed="false">🔢 Number OFF</button><button id="verifyTiles" type="button">✓ ตรวจชิ้นภาพ</button><button id="reset">⌂ เลือกภาพอื่น</button></div><p class="notice">แตะชิ้นภาพที่อยู่ติดช่องว่างเพื่อเลื่อนให้ภาพสมบูรณ์</p></div><aside><div class="panel"><h2 id="artTitle"></h2><div id="artArtist" class="hidden"></div><p id="artYear" class="muted hidden"></p><div class="stat"><span>⏱ เวลา</span><strong id="time">00:00</strong></div><div class="stat"><span>↔ จำนวนครั้งที่เลื่อน</span><strong id="moves">0</strong></div><div class="stat"><span>🏅 สถิติดีที่สุด</span><strong id="best">—</strong></div></div><div class="panel"><p id="status" class="muted">เรียงภาพให้สำเร็จเพื่อปลดล็อกประวัติผลงาน</p></div></aside></div></section><section id="gallery" class="view"><h2 class="gallery-title">🏛️ My Art Gallery</h2><p id="progress" class="progress"></p><div id="galleryGrid" class="gallery"></div></section><section id="collection" class="view" style="display:none"><h2>📚 My Collection</h2><p id="collectionProgress"></p><div id="collectionList" class="gallery"></div><div id="certificate" class="cert hide"><h2>🏆 Masterpiece Collector</h2><p>ART PUZZLE — The Masterpiece Gallery</p><p>สะสมผลงานศิลปะครบทั้ง 10 ชิ้นแล้ว!</p><button id="share">แชร์ความสำเร็จ</button></div></section><section id="records" class="view"><h2>🏆 Records</h2><div id="recordsBody"></div></section></main><nav class="tabs"><button data-tab="home">🏠 Home</button><button data-tab="puzzle">🧩 Puzzle</button><button data-tab="gallery">🏛️ Gallery</button><button data-tab="records">🏆 Records</button></nav><dialog id="modal"><div id="modalBody"></div><button id="closeModal">ปิด</button></dialog><script>
+/* v1.4 gallery export */
+.gallery-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.gallery-head .gallery-title{margin:0}.gallery-actions{display:flex;gap:6px}.gallery-actions button{font-size:12px;padding:7px 9px;white-space:nowrap}.gallery-head{margin-bottom:8px}#galleryExportDialog{max-width:min(96vw,600px);width:96vw;max-height:90dvh;overflow:auto}#galleryExportDialog canvas{display:block;width:100%;height:auto;max-height:none;border:3px ridge #cda45d;border-radius:7px}#galleryExportDialog .export-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}#galleryExportDialog .export-tools select{padding:7px;border-radius:7px}#galleryExportDialog .export-tools button{flex:1}#galleryExportDialog .export-close{float:right}#exportStatus{font-size:12px;margin:7px 0;color:#384766}
+@media(max-width:420px){.gallery-head .gallery-title{font-size:21px}.gallery-actions button{font-size:11px;padding:6px}}
+</style></head><body><header><h1>🎨 ART PUZZLE</h1><small>The Masterpiece Gallery</small><span class="brand">KRUTAR GAME</span></header><main class="app"><section id="home" class="view active"><div class="homebox"><h2>🏛️ Welcome to Your Gallery</h2><p class="homemeta">Solve Art Puzzles · Collect Masterpieces</p><label for="homeName">👤 Player Name</label><input id="homeName" maxlength="24" placeholder="Enter your name"><label>🏆 Gallery Collection <strong id="homeProgress" style="float:right">0 / 10</strong></label><div class="meter"><span id="homeMeter" style="width:0%"></span></div><label for="homeChoose">🎨 Select Masterpiece</label><div class="artpick"><span id="homePreviewWrap" class="preview-grid-wrap"><img id="homePreview" class="homepreview" alt="ภาพตัวอย่างผลงาน"></span><select id="homeChoose" aria-label="เลือกผลงานศิลปะ"></select></div><p class="homemeta" id="homeArtTitle"></p><button class="primary" id="homePlay">▶ PLAY PUZZLE</button><p class="homemeta">START · 3 · 2 · 1 · GO!</p><div class="homeactions"><button id="homeGallery">🏛️ Gallery</button><button id="homeRecords">🏆 Records</button></div></div><div class="footer">Version v1.4.1<br>KRUTAR GAME by KRUTAR CROSSWORD</div></section><section id="puzzle" class="view"><div class="play"><div><div class="frame"><div id="board" class="board" aria-label="กระดานสไลด์ภาพ 4 คูณ 4"></div><div id="countdown" aria-live="assertive"></div></div><div class="toolbar"><button id="start">▶ START</button><button id="shuffle" class="primary">🔀 สุ่มใหม่</button><button id="preview">👁 ดูภาพต้นฉบับ</button><button id="numberToggle" type="button" aria-pressed="false">🔢 Number OFF</button><button id="verifyTiles" type="button">✓ ตรวจชิ้นภาพ</button><button id="reset">⌂ เลือกภาพอื่น</button></div><p class="notice">แตะชิ้นภาพที่อยู่ติดช่องว่างเพื่อเลื่อนให้ภาพสมบูรณ์</p></div><aside><div class="panel"><h2 id="artTitle"></h2><div id="artArtist" class="hidden"></div><p id="artYear" class="muted hidden"></p><div class="stat"><span>⏱ เวลา</span><strong id="time">00:00</strong></div><div class="stat"><span>↔ จำนวนครั้งที่เลื่อน</span><strong id="moves">0</strong></div><div class="stat"><span>🏅 สถิติดีที่สุด</span><strong id="best">—</strong></div></div><div class="panel"><p id="status" class="muted">เรียงภาพให้สำเร็จเพื่อปลดล็อกประวัติผลงาน</p></div></aside></div></section><section id="gallery" class="view"><div class="gallery-head"><h2 class="gallery-title">🏛️ My Art Gallery</h2><div class="gallery-actions"><button type="button" id="galleryPNG">📸 PNG</button><button type="button" id="galleryShare">↗ แชร์</button></div></div><p id="progress" class="progress"></p><div id="galleryGrid" class="gallery"></div></section><section id="collection" class="view" style="display:none"><h2>📚 My Collection</h2><p id="collectionProgress"></p><div id="collectionList" class="gallery"></div><div id="certificate" class="cert hide"><h2>🏆 Masterpiece Collector</h2><p>ART PUZZLE — The Masterpiece Gallery</p><p>สะสมผลงานศิลปะครบทั้ง 10 ชิ้นแล้ว!</p><button id="share">แชร์ความสำเร็จ</button></div></section><section id="records" class="view"><h2>🏆 Records</h2><div id="recordsBody"></div></section></main><nav class="tabs"><button data-tab="home">🏠 Home</button><button data-tab="puzzle">🧩 Puzzle</button><button data-tab="gallery">🏛️ Gallery</button><button data-tab="records">🏆 Records</button></nav><dialog id="galleryExportDialog"><button class="export-close" id="exportClose" type="button">✕ ปิด</button><h3>🏛️ My Gallery Certificate</h3><div class="export-tools"><label for="avatarChoice">Avatar</label><select id="avatarChoice"><option value="male">ชาย</option><option value="female">หญิง</option></select><button id="exportSave" type="button">📸 บันทึก PNG</button><button id="exportShare" type="button">↗ แชร์ภาพ</button></div><p id="exportStatus" aria-live="polite"></p><canvas id="exportCanvas" width="900" height="1350"></canvas></dialog><dialog id="modal"><div id="modalBody"></div><button id="closeModal">ปิด</button></dialog><script>
 const arts=[
 ['The Starry Night','Vincent van Gogh','1889','ท้องฟ้ายามค่ำคืนที่มองเห็นจากสถานบำบัดในแซ็ง-เรมี ภาพถ่ายทอดอารมณ์และจินตนาการผ่านเส้นหมุนวน','Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg'],
 ['Mona Lisa','Leonardo da Vinci','ราว 1503–1519','ภาพบุคคลยุคเรอเนซองส์ที่โดดเด่นด้วยการไล่โทนแสงเงาแบบ sfumato และรอยยิ้มอันน่าค้นหา','Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg'],
@@ -82,5 +85,81 @@ $('homeName').addEventListener('input',()=>{saved.name=$('homeName').value.trim(
 $('homePlay').onclick=()=>{saved.name=$('homeName').value.trim().slice(0,24)||'Player';index=Number($('homeChoose').value)||0;save();scramble();renderGallery();renderRecords();switchTab('puzzle');begin()};
 $('homeGallery').onclick=()=>{saved.name=$('homeName').value.trim().slice(0,24)||'Player';save();switchTab('gallery')};
 $('homeRecords').onclick=()=>{saved.name=$('homeName').value.trim().slice(0,24)||'Player';save();switchTab('records')};
+
+
+/* v1.4: Gallery Certificate export. Uses the same saved gallery progress and player name. */
+const exportDialog=$('galleryExportDialog');
+$('avatarChoice').value=saved.avatar==='female'?'female':'male';
+const exportCanvas=$('exportCanvas');
+const ectx=exportCanvas.getContext('2d');
+let exportBusy=false;
+function roundedRect(ctx,x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=3;ctx.stroke()}}
+function centerText(t,y,size,color='#f8dc9e',font='Georgia, serif'){ectx.fillStyle=color;ectx.font=`bold ${size}px ${font}`;ectx.textAlign='center';ectx.fillText(t,450,y,830)}
+function wrapName(text,max=23){return text.length>max?text.slice(0,max-1)+'…':text}
+function drawAvatar(gender){
+ const c=ectx;c.save();c.translate(450,1058);
+ const jacket=gender==='female'?'#632b39':'#233d54',skin='#e5bb91';
+ c.fillStyle='#0a1020';c.beginPath();c.ellipse(0,210,150,18,0,0,Math.PI*2);c.fill();
+ // Jacket silhouette and neck
+ c.fillStyle=jacket;c.beginPath();c.moveTo(-83,47);c.quadraticCurveTo(-112,49,-125,105);c.lineTo(-133,205);c.lineTo(133,205);c.lineTo(125,105);c.quadraticCurveTo(112,49,83,47);c.quadraticCurveTo(0,16,-83,47);c.fill();
+ c.fillStyle=skin;c.fillRect(-17,26,34,31);
+ c.fillStyle='#d2a04b';c.beginPath();c.moveTo(-14,57);c.lineTo(0,94);c.lineTo(14,57);c.fill();
+ c.fillStyle=skin;c.beginPath();c.ellipse(0,-14,48,62,0,0,Math.PI*2);c.fill();
+ c.fillStyle='#241b17';c.beginPath();c.ellipse(0,-58,53,28,0,Math.PI,Math.PI*2);c.fill();
+ if(gender==='female'){c.fillRect(-52,-43,13,84);c.fillRect(39,-43,13,84)}
+ c.fillStyle='#2b2421';c.beginPath();c.arc(-18,-15,3,0,7);c.arc(18,-15,3,0,7);c.fill();
+ c.strokeStyle='#9c5c53';c.lineWidth=2;c.beginPath();c.arc(0,8,12,.15,Math.PI-.15);c.stroke();
+ // True folded-arms pose: elbows point outward, forearms lie horizontally across chest.
+ c.lineCap='round';c.lineJoin='round';
+ c.strokeStyle=jacket;c.lineWidth=31;c.beginPath();c.moveTo(-103,83);c.lineTo(-79,139);c.lineTo(62,123);c.stroke();
+ c.beginPath();c.moveTo(103,83);c.lineTo(79,149);c.lineTo(-62,127);c.stroke();
+ c.strokeStyle=skin;c.lineWidth=18;c.beginPath();c.moveTo(62,123);c.lineTo(81,121);c.moveTo(-62,127);c.lineTo(-81,125);c.stroke();
+ c.strokeStyle='#d9a67b';c.lineWidth=2;c.beginPath();c.moveTo(-67,127);c.lineTo(49,141);c.stroke();
+ c.restore();
+}
+function fitArtwork(img,x,y,w,h){const r=Math.min(w/img.naturalWidth,h/img.naturalHeight);const dw=img.naturalWidth*r,dh=img.naturalHeight*r;ectx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh)}
+// Prefer same-origin artwork assets for reliable canvas export. When the
+// GitHub assets folder has not been uploaded yet, try a CORS-enabled image
+// delivery endpoint, then Wikimedia as a final fallback.
+const certificateLocalUrls=arts.map((a,i)=>'art-'+String(i+1).padStart(2,'0')+'.jpg');
+const certificateProxyUrls=arts.map(a=>'https://wsrv.nl/?url='+encodeURIComponent('https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(a[4]))+'&w=900&output=jpg');
+function loadExportImage(src,timeoutMs=9000){return new Promise(resolve=>{
+ let done=false,img=new Image(),timer=setTimeout(()=>finish(null),timeoutMs);
+ function finish(value){if(done)return;done=true;clearTimeout(timer);img.onload=null;img.onerror=null;resolve(value)}
+ img.crossOrigin='anonymous';img.onload=()=>finish(img);img.onerror=()=>finish(null);img.src=src;
+})}
+async function imageForCertificate(i){
+ for(const src of [certificateLocalUrls[i],certificateProxyUrls[i],urls[i],backupUrls[i]]){
+   const img=await loadExportImage(src);if(img)return img;
+ }
+ return null;
+}
+async function renderCertificate(){if(exportBusy)return;exportBusy=true;exportCanvas.dataset.complete='false';$('exportStatus').textContent='กำลังสร้างภาพจาก Gallery ล่าสุด…';
+ try{const c=ectx,W=900,H=1350;c.clearRect(0,0,W,H);let grad=c.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#4b2818');grad.addColorStop(.52,'#1b1320');grad.addColorStop(1,'#4c301d');c.fillStyle=grad;c.fillRect(0,0,W,H);
+ for(let x=32;x<900;x+=95){c.strokeStyle='#ad7a3730';c.lineWidth=2;c.beginPath();c.moveTo(x,0);c.lineTo(x-110,H);c.stroke()}
+ c.strokeStyle='#c89c51';c.lineWidth=14;c.strokeRect(18,18,864,1314);c.strokeStyle='#f1d58b';c.lineWidth=3;c.strokeRect(32,32,836,1286);
+ centerText('ART PUZZLE',104,61);centerText('The Masterpiece Gallery',146,28,'#f8e3b7');centerText('KRUTAR GAME  •  MY GALLERY',189,21,'#dfb86a','Arial, sans-serif');
+ const count=arts.reduce((n,a,i)=>n+(saved.unlocked[i]?1:0),0);centerText(wrapName(saved.name||'Player')+"'s Gallery",246,39,'#fff1d1');centerText(`${count} / 10 MASTERPIECES UNLOCKED`,286,25,'#f2d086','Arial, sans-serif');
+ // ten framed artworks, 5 columns x 2 rows, gold Louis-style framing
+ const imgs=await Promise.all(arts.map((a,i)=>saved.unlocked[i]?imageForCertificate(i):Promise.resolve(null)));
+ let missing=0;
+ for(let i=0;i<10;i++){let col=i%5,row=Math.floor(i/5),x=52+col*161,y=326+row*224,w=152,h=184;
+ roundedRect(c,x-4,y-4,w+8,h+8,8,'#6c431c','#eac77a');roundedRect(c,x+3,y+3,w-6,h-6,3,'#d4a652','#f9df9b');roundedRect(c,x+12,y+12,w-24,h-42,2,'#101a2c','#86633a');
+ if(saved.unlocked[i]){if(imgs[i])fitArtwork(imgs[i],x+13,y+13,w-26,h-44);else{missing++;c.fillStyle='#23334b';c.fillRect(x+13,y+13,w-26,h-44);c.fillStyle='#e9ca86';c.textAlign='center';c.font='17px Arial';c.fillText('UNLOCKED',x+w/2,y+75)}}else{c.textAlign='center';c.font='52px Arial';c.fillStyle='#d9b56a';c.fillText('🔒',x+w/2,y+98)}
+ c.textAlign='center';c.fillStyle='#fff1cf';c.font='bold 15px Arial';c.fillText(`${i+1}. ${arts[i][0].length>16?arts[i][0].slice(0,15)+'…':arts[i][0]}`,x+w/2,y+h-10,w-12);
+ // small decorative flourishes
+ c.fillStyle='#f6d68d';c.beginPath();c.arc(x+w/2,y,5,0,7);c.fill();}
+ roundedRect(c,78,795,744,64,12,'#2b1c18','#bd8b48');centerText(count===10?'GRAND MASTERPIECE COLLECTOR':'MASTERPIECE COLLECTOR IN PROGRESS',836,25,'#f7d991');
+ drawAvatar($('avatarChoice').value);centerText(wrapName(saved.name||'Player'),1283,29,'#fff1cf');centerText('Solve  •  Unlock  •  Collect   |   krutarcrossword.github.io/ART-PUZZLE/',1310,17,'#e4c387','Arial, sans-serif');
+ $('exportStatus').textContent=missing?`ยังโหลดภาพที่ปลดล็อกไม่ได้ ${missing} ภาพ — กรุณาเพิ่มไฟล์ art-01.jpg ถึง art-10.jpg ไว้ข้าง index.html ก่อนบันทึกหรือแชร์`:'พร้อมบันทึกหรือแชร์ภาพ PNG';
+ exportCanvas.dataset.complete=missing===0?'true':'false';
+ }catch(e){$('exportStatus').textContent='สร้างภาพไม่สำเร็จ: '+e.message}finally{exportBusy=false}}
+function exportBlob(){if(exportBusy||exportCanvas.dataset.complete!=='true')return Promise.reject(new Error('ภาพที่ปลดล็อกยังโหลดไม่ครบ ไม่สามารถส่งออก Certificate ได้'));return new Promise((resolve,reject)=>exportCanvas.toBlob(b=>b?resolve(b):reject(new Error('ไม่สามารถสร้าง PNG ได้ (อาจเกิดจากข้อจำกัดภาพข้ามเว็บไซต์)')),'image/png'))}
+async function saveCertificate(){try{if(exportBusy)return;let b=await exportBlob(),url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='ART-PUZZLE-Gallery-'+(saved.name||'Player').replace(/[^\w\u0E00-\u0E7F-]/g,'_')+'.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}catch(e){alert(e.message)}}
+async function shareCertificate(){try{if(exportBusy)return;const b=await exportBlob(),file=new File([b],'ART-PUZZLE-Gallery.png',{type:'image/png'}),count=arts.filter((a,i)=>saved.unlocked[i]).length,text=`🎨 ${saved.name}'s ART PUZZLE Gallery — ${count}/10 masterpieces! มาเล่นสะสมให้ครบกัน https://krutarcrossword.github.io/ART-PUZZLE/`;if(navigator.canShare?.({files:[file]})&&navigator.share){await navigator.share({files:[file],title:'ART PUZZLE — My Gallery',text})}else{alert('อุปกรณ์นี้ยังไม่รองรับการแชร์ไฟล์ภาพโดยตรง กรุณากดบันทึก PNG แล้วแชร์จากแกลเลอรีของมือถือ')}}catch(e){if(e.name!=='AbortError')alert('แชร์ไม่สำเร็จ: '+e.message)}}
+function openCertificate(share=false){$('avatarChoice').value=saved.avatar==='female'?'female':'male';exportDialog.showModal();renderCertificate()}
+$('galleryPNG').onclick=()=>openCertificate();$('galleryShare').onclick=()=>openCertificate(true);
+$('avatarChoice').onchange=()=>{saved.avatar=$('avatarChoice').value;save();renderCertificate()};
+$('exportSave').onclick=saveCertificate;$('exportShare').onclick=shareCertificate;$('exportClose').onclick=()=>exportDialog.close();
 
 </script></body></html>
